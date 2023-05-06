@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "bd-toolkit"
+version = "0.1.0"
+description = ""
+authors = ["Yaksis <59007159+Yakkhini@users.noreply.github.com>"]
+readme = "README.md"
+packages = [{include = "bd_toolkit"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

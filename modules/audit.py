@@ -27,3 +27,12 @@ if check == 'y':
 else:
     print('Work list checking error.')
     exit()
+
+revit_incorrect_work_name_list = revit_kzgz_sheet.loc[(revit_kzgz_sheet['作业名称'].isin(work_list)) != True]
+
+print(revit_incorrect_work_name_list)
+
+if revit_incorrect_work_name_list.empty:
+    input('Revit csv file work name checking done. Enter to continue...')
+else:
+    print('Revit csv file work name checking error.')

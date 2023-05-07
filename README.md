@@ -1,5 +1,21 @@
 # BD-Toolkit
 
+[![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-%23FE5196?logo=conventionalcommits&logoColor=white)](https://conventionalcommits.org)
+
+A Standard data processing script collection as a part of bachelor design.
+
+## Features
+
+This collection aimed to enhance connection between Oracle Primavera, Autodesk Revit and Autodesk Navisworks.
+
+* BD-Toolkit could handle exported P6 xlsx file and Revit csv file data.
+* The output files could be imported to the next program in standard workflow by just on step.
+* Toolkit has built-in functions to audit, calculation, formatting data.
+
+## Modules
+
+## Usage
+
 ## LICENSE
 
 ```

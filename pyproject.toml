@@ -10,6 +10,7 @@ packages = [{include = "bd_toolkit"}]
 python = "^3.10"
 pandas = "^2.0.1"
 openpyxl = "^3.1.2"
+openai = "^0.27.6"
 
 
 [build-system]

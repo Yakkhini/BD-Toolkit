@@ -10,7 +10,6 @@ MERCHANTABILITY OR FIT FOR A PARTICULAR PURPOSE.
 See the Mulan PSL v2 for more details.
 '''
 
-from tabnanny import check
 import pandas as pd
 
 revit_kzgz_sheet = pd.read_csv("data/KZGZ.csv")

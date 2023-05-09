@@ -11,7 +11,7 @@ This collection aimed to enhance connection between Oracle Primavera, Autodesk R
 * BD-Toolkit could handle exported P6 xlsx file and Revit csv file data.
 * The output files could be imported to the next program in standard workflow by just on step.
 * Toolkit has built-in functions to audit, calculation, formatting data.
-* ChatGPT+ support for generate report from datas.
+* ChatGPT+ support for generating report from datas.
 
 ## Modules
 

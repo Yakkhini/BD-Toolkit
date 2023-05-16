@@ -21,3 +21,10 @@ def excel2csv(excel_file):
         df.to_csv(csv_path, index=False)
         print(f"工作表 '{sheet_name}' 已保存为 CSV 文件 '{csv_path}'")
     return
+
+
+def revit_raw_file_merge(csv_file_path):
+    csv_file = pd.read_csv(csv_file_path).loc[:, ["作业名称", "清单计量编码", "体积"]]
+    result = csv_file.groupby(["作业名称", "清单计量编码"]).agg({"体积": "sum"}).reset_index()
+
+    return result

@@ -14,3 +14,6 @@ import preprocessing
 
 p6_excel_file = "data/P6BD.xlsx"
 preprocessing.excel2csv(p6_excel_file)
+
+revit_kzgz_file = "data/KZGZ.csv"
+preprocessing.revit_raw_file_merge(revit_kzgz_file)

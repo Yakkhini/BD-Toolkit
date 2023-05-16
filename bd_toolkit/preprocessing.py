@@ -10,7 +10,14 @@ MERCHANTABILITY OR FIT FOR A PARTICULAR PURPOSE.
 See the Mulan PSL v2 for more details.
 """
 
-import preprocessing
+import pandas as pd
 
-p6_excel_file = "data/P6BD.xlsx"
-preprocessing.excel2csv(p6_excel_file)
+
+def excel2csv(excel_file):
+    xlsx = pd.ExcelFile(excel_file)
+    for sheet_name in xlsx.sheet_names:
+        df = pd.read_excel(excel_file, sheet_name=sheet_name)
+        csv_path = "data/P6/" + sheet_name + ".csv"
+        df.to_csv(csv_path, index=False)
+        print(f"工作表 '{sheet_name}' 已保存为 CSV 文件 '{csv_path}'")
+    return

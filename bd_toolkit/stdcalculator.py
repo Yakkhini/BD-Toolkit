@@ -26,8 +26,14 @@ def std_workload_cal(code, load, var1=0, var2=0):
 
 
 def __result_series_cal(result, load):
-    result.loc["worker_load"] = np.fromstring(result.loc["worker_load"], sep=",") * load
+    worker_load_array = np.fromstring(result.loc["worker_load"], sep=",") * load
+    materials_load_array = np.fromstring(result.loc["materials_load"], sep=",") * load
+    result.loc["worker_load"] = (
+        np.array2string(worker_load_array, separator=",").strip("[]").replace(" ", "")
+    )
     result.loc["materials_load"] = (
-        np.fromstring(result.loc["materials_load"], sep=",") * load
+        np.array2string(materials_load_array, separator=",")
+        .strip("[]")
+        .replace(" ", "")
     )
     return result

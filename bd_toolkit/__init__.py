@@ -10,6 +10,6 @@ MERCHANTABILITY OR FIT FOR A PARTICULAR PURPOSE.
 See the Mulan PSL v2 for more details.
 """
 
-from . import preprocessing, workload
+from . import formation, preprocessing, workload
 
-__all__ = ["preprocessing", "workload"]
+__all__ = ["formation", "preprocessing", "workload"]

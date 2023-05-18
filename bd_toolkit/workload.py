@@ -11,15 +11,7 @@ See the Mulan PSL v2 for more details.
 """
 
 import pandas as pd
-import stdcalculator
-
-"""
-p6_work_sheet = pd.read_excel("data/P6BD.xlsx").drop(index=[0])
-work_list = pd.DataFrame({"work_list": p6_work_sheet["task_name"].unique()})
-revit_kzgz_sheet = pd.read_csv("data/KZGZ.csv")
-
-work_list.to_csv("out/work_list.csv", index=False)
-"""
+from . import stdcalculator
 
 
 def revit_workload_cal(file_path):

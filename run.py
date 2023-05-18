@@ -10,7 +10,7 @@ MERCHANTABILITY OR FIT FOR A PARTICULAR PURPOSE.
 See the Mulan PSL v2 for more details.
 """
 
-import bd_toolkit
+import bd_toolkit as bd
 
 p6_excel_file = "data/P6BD.xlsx"
 bd_toolkit.preprocessing.excel2csv(p6_excel_file)
@@ -23,4 +23,9 @@ bd_toolkit.preprocessing.revit_raw_file_merge(revit_kzgz_file).to_csv(
 revit_merged_file = "data/revit/KZGZ.csv"
 bd_toolkit.workload.revit_workload_cal(revit_merged_file).to_csv(
     "data/revit/KZGZ_caled.csv", index=False
+)
+
+revit_caled_file = "data/revit/KZGZ_caled.csv"
+bd.formation.worker_load_format(revit_caled_file).to_csv(
+    "data/revit/KZGZ_caled_formatted.csv", index=False
 )

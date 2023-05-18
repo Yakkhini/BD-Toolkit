@@ -13,15 +13,18 @@ See the Mulan PSL v2 for more details.
 import bd_toolkit as bd
 
 p6_excel_file = "data/P6BD.xlsx"
-bd_toolkit.preprocessing.excel2csv(p6_excel_file)
+bd.preprocessing.excel2csv(p6_excel_file)
+bd.preprocessing.p6_work_list_extract("data/P6/TASK.csv").to_csv(
+    "out/work_list.csv", index=False
+)
 
 revit_kzgz_file = "data/KZGZ.csv"
-bd_toolkit.preprocessing.revit_raw_file_merge(revit_kzgz_file).to_csv(
+bd.preprocessing.revit_raw_file_merge(revit_kzgz_file).to_csv(
     "data/revit/KZGZ.csv", index=False
 )
 
 revit_merged_file = "data/revit/KZGZ.csv"
-bd_toolkit.workload.revit_workload_cal(revit_merged_file).to_csv(
+bd.workload.revit_workload_cal(revit_merged_file).to_csv(
     "data/revit/KZGZ_caled.csv", index=False
 )
 

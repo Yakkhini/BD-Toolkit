@@ -13,6 +13,14 @@ See the Mulan PSL v2 for more details.
 import pandas as pd
 
 
+def p6_work_list_extract(file_path):
+    p6_work_sheet = pd.read_csv(file_path)
+    p6_work_sheet.columns = p6_work_sheet.iloc[0]
+    p6_work_sheet = p6_work_sheet.drop(index=[0])
+    work_list = p6_work_sheet.loc[:, ["作业代码", "作业状态", "作业名称"]]
+    return work_list
+
+
 def excel2csv(excel_file):
     xlsx = pd.ExcelFile(excel_file)
     for sheet_name in xlsx.sheet_names:

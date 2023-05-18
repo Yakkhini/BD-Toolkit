@@ -15,7 +15,7 @@ import bd_toolkit as bd
 p6_excel_file = "data/P6BD.xlsx"
 bd.preprocessing.excel2csv(p6_excel_file)
 bd.preprocessing.p6_work_list_extract("data/P6/TASK.csv").to_csv(
-    "out/work_list.csv", index=False
+    "data/P6/work_list.csv", index=False
 )
 
 revit_kzgz_file = "data/KZGZ.csv"
@@ -29,6 +29,7 @@ bd.workload.revit_workload_cal(revit_merged_file).to_csv(
 )
 
 revit_caled_file = "data/revit/KZGZ_caled.csv"
-bd.formation.worker_load_format(revit_caled_file).to_csv(
+work_list_file = "data/P6/work_list.csv"
+bd.formation.worker_load_format(revit_caled_file, work_list_file).to_csv(
     "data/revit/KZGZ_caled_formatted.csv", index=False
 )

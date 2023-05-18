@@ -33,6 +33,15 @@ def excel2csv(excel_file):
 
 def revit_raw_file_merge(csv_file_path):
     csv_file = pd.read_csv(csv_file_path).loc[:, ["作业名称", "清单计量编码", "体积"]]
-    result = csv_file.groupby(["作业名称", "清单计量编码"]).agg({"体积": "sum"}).reset_index()
+    result = (
+        csv_file.groupby(["作业名称", "清单计量编码"])
+        .agg({"体积": "sum"})
+        .reset_index()
+        .rename({"体积": "数量"}, axis=1)
+    )
 
     return result
+
+
+def merge_revit_p6_file(revit_file, p6_file):
+    return

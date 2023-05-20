@@ -30,9 +30,9 @@ bd.preprocessing.revit_raw_file_merge(revit_raw_file).to_csv(
     "data/revit/merged.csv", index=False
 )
 
-revit_merged_file = "data/revit/KZGZ.csv"
+revit_merged_file = "data/revit/merged.csv"
 bd.workload.revit_workload_cal(revit_merged_file).to_csv(
-    "data/revit/KZGZ_caled.csv", index=False
+    "data/revit/caled.csv", index=False
 )
 
 revit_caled_file = "data/revit/KZGZ_caled.csv"

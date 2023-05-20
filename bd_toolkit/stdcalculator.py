@@ -18,10 +18,12 @@ def std_workload_cal(code, load, var1=0, var2=0):
     std_ty0131 = pd.read_csv("stdfile/TY0131_2019.csv").set_index("code")
     result = std_ty0131.loc[code]
 
+    load /= 10
+
     match code:
         # 混凝土矩形柱
-        case 10502001:
-            load /= 10
+        case _:
+            load = load
     return __result_series_cal(result, load)
 
 

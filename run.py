@@ -35,8 +35,8 @@ bd.workload.revit_workload_cal(revit_merged_file).to_csv(
     "data/revit/caled.csv", index=False
 )
 
-revit_caled_file = "data/revit/KZGZ_caled.csv"
+revit_caled_file = "data/revit/caled.csv"
 work_list_file = "data/P6/work_list.csv"
 bd.formation.worker_load_format(revit_caled_file, work_list_file).to_csv(
-    "data/revit/KZGZ_caled_formatted.csv", index=False
+    "data/revit/formatted.csv", index=False
 )

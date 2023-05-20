@@ -30,10 +30,21 @@ def worker_load_format(worker_load_path, work_list_path):
         .reset_index()
         .drop(columns=["index"])
     ).rename(columns={"作业名称": "task__task_name", "worker_load": "target_qty"})
+
+    revit_caled_sheet["role_id"] = np.nan
+
     revit_caled_sheet = revit_caled_sheet.merge(
         work_list_sheet, on="task__task_name"
     ).loc[
-        :, ["rsrc_id", "task_id", "TASK__status_code", "task__task_name", "target_qty"]
+        :,
+        [
+            "rsrc_id",
+            "task_id",
+            "TASK__status_code",
+            "role_id",
+            "task__task_name",
+            "target_qty",
+        ],
     ]
     return revit_caled_sheet
 

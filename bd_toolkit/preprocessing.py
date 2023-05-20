@@ -13,6 +13,19 @@ See the Mulan PSL v2 for more details.
 import pandas as pd
 
 
+def combine_revit_files(path_prefix, file_name_list):
+    result = pd.DataFrame()
+    for file_name in file_name_list:
+        result = pd.concat(
+            [
+                result,
+                pd.read_csv(path_prefix + file_name + ".csv", encoding="utf_16_le"),
+            ],
+            ignore_index=True,
+        )
+    return result
+
+
 def p6_work_list_extract(file_path):
     p6_work_sheet = pd.read_csv(file_path)
     p6_work_sheet.columns = p6_work_sheet.iloc[0]
@@ -41,7 +54,3 @@ def revit_raw_file_merge(csv_file_path):
     )
 
     return result
-
-
-def merge_revit_p6_file(revit_file, p6_file):
-    return

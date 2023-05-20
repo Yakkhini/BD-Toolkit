@@ -12,6 +12,13 @@ See the Mulan PSL v2 for more details.
 
 import bd_toolkit as bd
 
+revit_file_name_list = ["KZGZ", "KL", "LB", "WALL", "DOOR", "WINDOW"]
+revit_file_path = "data/Revit_"
+
+bd.preprocessing.combine_revit_files(revit_file_path, revit_file_name_list).to_csv(
+    "data/revit/RAW.csv", index=False
+)
+
 p6_excel_file = "data/P6BD.xlsx"
 bd.preprocessing.excel2csv(p6_excel_file)
 bd.preprocessing.p6_work_list_extract("data/P6/TASK.csv").to_csv(

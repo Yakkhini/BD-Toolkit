@@ -23,6 +23,7 @@ def combine_revit_files(path_prefix, file_name_list):
             ],
             ignore_index=True,
         )
+
     return result
 
 
@@ -41,6 +42,9 @@ def excel2csv(excel_file):
         csv_path = "data/P6/" + sheet_name + ".csv"
         df.to_csv(csv_path, index=False)
         print(f"工作表 '{sheet_name}' 已保存为 CSV 文件 '{csv_path}'")
+    pd.read_excel(excel_file, sheet_name="USERDATA").to_excel(
+        "out/p6.xlsx", sheet_name="USERDATA"
+    )
     return
 
 

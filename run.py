@@ -40,3 +40,6 @@ work_list_file = "data/P6/work_list.csv"
 bd.formation.worker_load_format(revit_caled_file, work_list_file).to_csv(
     "data/revit/formatted.csv", index=False
 )
+
+revit_formatted_path = "data/revit/formatted.csv"
+bd.export.revit_formatted_to_p6(revit_formatted_path, p6_excel_file)

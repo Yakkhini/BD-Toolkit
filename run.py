@@ -25,9 +25,9 @@ bd.preprocessing.p6_work_list_extract("data/P6/TASK.csv").to_csv(
     "data/P6/work_list.csv", index=False
 )
 
-revit_kzgz_file = "data/KZGZ.csv"
-bd.preprocessing.revit_raw_file_merge(revit_kzgz_file).to_csv(
-    "data/revit/KZGZ.csv", index=False
+revit_raw_file = "data/revit/RAW.csv"
+bd.preprocessing.revit_raw_file_merge(revit_raw_file).to_csv(
+    "data/revit/merged.csv", index=False
 )
 
 revit_merged_file = "data/revit/KZGZ.csv"

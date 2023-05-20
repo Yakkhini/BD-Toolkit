@@ -52,5 +52,6 @@ def revit_raw_file_merge(csv_file_path):
         .reset_index()
         .rename({"体积": "数量"}, axis=1)
     )
+    result.清单计量编码 = result.清单计量编码.astype(int)
 
     return result

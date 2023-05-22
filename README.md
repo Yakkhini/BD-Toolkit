@@ -13,6 +13,10 @@ This collection aimed to enhance connection between Oracle Primavera, Autodesk R
 * Toolkit has built-in functions to audit, calculation, formatting data.
 * ChatGPT+ support for generating report from datas.
 
+FileFlow in script:
+
+![FileFlow](img/file_flow.excalidraw.png)
+
 ## Modules
 
 ## Usage

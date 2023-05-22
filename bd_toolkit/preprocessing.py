@@ -23,6 +23,7 @@ def combine_revit_files(path_prefix, file_name_list):
             ],
             ignore_index=True,
         )
+    result['体积'] = result["体积"].fillna(1)
 
     return result
 

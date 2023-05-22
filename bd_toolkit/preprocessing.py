@@ -23,7 +23,8 @@ def combine_revit_files(path_prefix, file_name_list):
             ],
             ignore_index=True,
         )
-    result['体积'] = result["体积"].fillna(1)
+    result["体积"] = result["体积"].fillna(10)
+    result["var1"] = result["var1"].fillna("none")
 
     return result
 
@@ -50,9 +51,9 @@ def excel2csv(excel_file):
 
 
 def revit_raw_file_merge(csv_file_path):
-    csv_file = pd.read_csv(csv_file_path).loc[:, ["作业名称", "清单计量编码", "体积"]]
+    csv_file = pd.read_csv(csv_file_path).loc[:, ["作业名称", "清单计量编码", "体积", "var1"]]
     result = (
-        csv_file.groupby(["作业名称", "清单计量编码"])
+        csv_file.groupby(["作业名称", "清单计量编码", "var1"])
         .agg({"体积": "sum"})
         .reset_index()
         .rename({"体积": "数量"}, axis=1)

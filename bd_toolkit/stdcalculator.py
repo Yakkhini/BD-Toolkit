@@ -14,9 +14,16 @@ import pandas as pd
 import numpy as np
 
 
-def std_workload_cal(code, load, var1=0, var2=0):
+def std_workload_cal(code, load, var1, var2=0):
     std_ty0131 = pd.read_csv("stdfile/TY0131_2019.csv").set_index("code")
     result = std_ty0131.loc[code]
+
+    result.loc["worker_load"] = np.fromstring(result.loc["worker_load"], sep=",")
+    result.loc["materials_load"] = np.fromstring(result.loc["materials_load"], sep=",")
+    result.loc["materials"] = np.array(result.loc["materials"].split(","))
+
+    if var1 != "none" and str(result.loc["materials"][0]) == "var1":
+        result.loc["materials"][0] = var1
 
     load /= 10
 
@@ -28,8 +35,8 @@ def std_workload_cal(code, load, var1=0, var2=0):
 
 
 def __result_series_cal(result, load):
-    worker_load_array = np.fromstring(result.loc["worker_load"], sep=",") * load
-    materials_load_array = np.fromstring(result.loc["materials_load"], sep=",") * load
+    worker_load_array = result.loc["worker_load"] * load
+    materials_load_array = result.loc["materials_load"] * load
     result.loc["worker_load"] = (
         np.array2string(worker_load_array, separator=",").strip("[]").replace(" ", "")
     )
@@ -37,5 +44,11 @@ def __result_series_cal(result, load):
         np.array2string(materials_load_array, separator=",")
         .strip("[]")
         .replace(" ", "")
+    )
+    result.loc["materials"] = (
+        np.array2string(result.loc["materials"], separator=",")
+        .strip("[]")
+        .replace(" ", "")
+        .replace("'", "")
     )
     return result

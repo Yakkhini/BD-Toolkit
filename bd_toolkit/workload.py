@@ -21,5 +21,7 @@ def revit_workload_cal(file_path):
 
 
 def __workload_row_transform(row):
-    append = stdcalculator.std_workload_cal(row.loc["清单计量编码"], row.loc["数量"])
+    append = stdcalculator.std_workload_cal(
+        row.loc["清单计量编码"], row.loc["数量"], row.loc["var1"]
+    )
     return pd.concat([row, append])

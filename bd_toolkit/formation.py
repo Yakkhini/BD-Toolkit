@@ -22,16 +22,36 @@ def worker_load_format(worker_load_path, work_list_path):
             "作业状态": "TASK__status_code",
         }
     )
-    revit_caled_sheet = pd.read_csv(worker_load_path).loc[:, ["作业名称", "worker_load"]]
-    revit_caled_sheet.insert(0, "rsrc_id", "Labor,Mechanic,Technician")
-    revit_caled_sheet = revit_caled_sheet.apply(__string_to_list, axis="columns")
-    revit_caled_sheet = (
-        revit_caled_sheet.explode(["rsrc_id", "worker_load"])
+    revit_caled_sheet = pd.read_csv(worker_load_path)
+    revit_worker_caled_sheet = revit_caled_sheet.loc[:, ["作业名称", "worker_load"]]
+    revit_worker_caled_sheet.insert(0, "rsrc_id", "Labor,Mechanic,Technician")
+    revit_worker_caled_sheet = revit_worker_caled_sheet.rename(
+        columns={"worker_load": "target_qty"}
+    ).apply(__string_to_list, axis="columns")
+    revit_worker_caled_sheet = (
+        revit_worker_caled_sheet.explode(["rsrc_id", "target_qty"])
         .reset_index()
         .drop(columns=["index"])
-    ).rename(columns={"作业名称": "task__task_name", "worker_load": "target_qty"})
+    ).rename(columns={"作业名称": "task__task_name"})
+
+    revit_mat_caled_sheet = revit_caled_sheet.loc[
+        :, ["作业名称", "materials", "materials_load"]
+    ].rename(columns={"materials": "rsrc_id"})
+    print(revit_mat_caled_sheet)
+    revit_mat_caled_sheet = revit_mat_caled_sheet.rename(
+        columns={"materials_load": "target_qty"}
+    ).apply(__string_to_list, axis="columns")
+    revit_mat_caled_sheet = (
+        revit_mat_caled_sheet.explode(["rsrc_id", "target_qty"])
+        .reset_index()
+        .drop(columns=["index"])
+    ).rename(columns={"作业名称": "task__task_name"})
+
+    revit_caled_sheet = pd.concat([revit_worker_caled_sheet, revit_mat_caled_sheet])
 
     revit_caled_sheet["role_id"] = np.nan
+
+    print(revit_caled_sheet)
 
     revit_caled_sheet = revit_caled_sheet.merge(
         work_list_sheet, on="task__task_name"
@@ -62,5 +82,5 @@ def worker_load_format(worker_load_path, work_list_path):
 
 def __string_to_list(row):
     row.loc["rsrc_id"] = row.loc["rsrc_id"].split(",")
-    row.loc["worker_load"] = np.fromstring(row.loc["worker_load"], sep=",").tolist()
+    row.loc["target_qty"] = np.fromstring(row.loc["target_qty"], sep=",").tolist()
     return row

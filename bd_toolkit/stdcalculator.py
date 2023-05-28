@@ -38,17 +38,22 @@ def __result_series_cal(result, load):
     worker_load_array = result.loc["worker_load"] * load
     materials_load_array = result.loc["materials_load"] * load
     result.loc["worker_load"] = (
-        np.array2string(worker_load_array, separator=",").strip("[]").replace(" ", "")
+        np.array2string(worker_load_array, separator=",")
+        .strip("[]")
+        .replace(" ", "")
+        .replace("\n", "")
     )
     result.loc["materials_load"] = (
         np.array2string(materials_load_array, separator=",")
         .strip("[]")
         .replace(" ", "")
+        .replace("\n", "")
     )
     result.loc["materials"] = (
         np.array2string(result.loc["materials"], separator=",")
         .strip("[]")
         .replace(" ", "")
         .replace("'", "")
+        .replace("\n", "")
     )
     return result

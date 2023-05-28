@@ -37,7 +37,6 @@ def worker_load_format(worker_load_path, work_list_path):
     revit_mat_caled_sheet = revit_caled_sheet.loc[
         :, ["作业名称", "materials", "materials_load"]
     ].rename(columns={"materials": "rsrc_id"})
-    print(revit_mat_caled_sheet)
     revit_mat_caled_sheet = revit_mat_caled_sheet.rename(
         columns={"materials_load": "target_qty"}
     ).apply(__string_to_list, axis="columns")
@@ -50,8 +49,6 @@ def worker_load_format(worker_load_path, work_list_path):
     revit_caled_sheet = pd.concat([revit_worker_caled_sheet, revit_mat_caled_sheet])
 
     revit_caled_sheet["role_id"] = np.nan
-
-    print(revit_caled_sheet)
 
     revit_caled_sheet = revit_caled_sheet.merge(
         work_list_sheet, on="task__task_name"

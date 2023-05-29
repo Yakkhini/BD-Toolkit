@@ -16,14 +16,26 @@ import pandas as pd
 def combine_revit_files(path_prefix, file_name_list):
     result = pd.DataFrame()
     for file_name in file_name_list:
+        file = pd.read_csv(path_prefix + file_name + ".csv", encoding="utf_16_le")
+        match file_name:
+            case "WINDOW":
+                file["数量"] = file["var1"]
+            case "DOOR":
+                file["数量"] = file["var1"]
+            case "WALL":
+                for i in range(len(file)):
+                    if file.loc[i, "清单计量编码"] == 11209204:
+                        file.loc[i, "体积"] = file.loc[i, "面积"]
+        if "体积" in file.columns:
+            file = file.rename({"体积": "数量"}, axis=1)
         result = pd.concat(
             [
                 result,
-                pd.read_csv(path_prefix + file_name + ".csv", encoding="utf_16_le"),
+                file.loc[:, ["数量", "作业名称", "清单计量编码", "var1"]],
             ],
             ignore_index=True,
         )
-    result["体积"] = result["体积"].fillna(10)
+    result["数量"] = result["数量"].fillna(0)
     result["var1"] = result["var1"].fillna("none")
 
     return result
@@ -51,12 +63,9 @@ def excel2csv(excel_file):
 
 
 def revit_raw_file_merge(csv_file_path):
-    csv_file = pd.read_csv(csv_file_path).loc[:, ["作业名称", "清单计量编码", "体积", "var1"]]
+    csv_file = pd.read_csv(csv_file_path).loc[:, ["作业名称", "清单计量编码", "数量", "var1"]]
     result = (
-        csv_file.groupby(["作业名称", "清单计量编码", "var1"])
-        .agg({"体积": "sum"})
-        .reset_index()
-        .rename({"体积": "数量"}, axis=1)
+        csv_file.groupby(["作业名称", "清单计量编码", "var1"]).agg({"数量": "sum"}).reset_index()
     )
     result.清单计量编码 = result.清单计量编码.astype(int)
 

@@ -25,18 +25,28 @@ def std_workload_cal(code, load, var1, var2=0):
     if var1 != "none" and str(result.loc["materials"][0]) == "var1":
         result.loc["materials"][0] = var1
 
-    load /= 10
-
     match code:
+        # 钢筋
+        case 10515092:
+            load = load
+        # 门窗幕墙
+        case 10801003:
+            load /= 100
+        case 10805035:
+            load /= 100
+        case 10806041:
+            load /= 100
+        case 11209204:
+            load /= 100
         # 混凝土矩形柱
         case _:
-            load = load
+            load = load / 10
     return __result_series_cal(result, load)
 
 
 def __result_series_cal(result, load):
-    worker_load_array = result.loc["worker_load"] * load
-    materials_load_array = result.loc["materials_load"] * load
+    worker_load_array = np.ceil(result.loc["worker_load"] * load).astype(int)
+    materials_load_array = np.ceil(result.loc["materials_load"] * load).astype(int)
     result.loc["worker_load"] = (
         np.array2string(worker_load_array, separator=",")
         .strip("[]")

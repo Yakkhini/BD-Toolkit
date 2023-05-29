@@ -64,8 +64,6 @@ def worker_load_format(worker_load_path, work_list_path):
         ],
     ]
 
-    print(revit_caled_sheet)
-
     revit_caled_sheet = (
         revit_caled_sheet.groupby(
             ["rsrc_id", "task_id", "TASK__status_code", "task__task_name"]
@@ -73,7 +71,6 @@ def worker_load_format(worker_load_path, work_list_path):
         .agg({"target_qty": "sum"})
         .reset_index()
     )
-    print(revit_caled_sheet)
     return revit_caled_sheet
 
 

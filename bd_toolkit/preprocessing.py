@@ -19,13 +19,22 @@ def combine_revit_files(path_prefix, file_name_list):
         file = pd.read_csv(path_prefix + file_name + ".csv", encoding="utf_16_le")
         match file_name:
             case "WINDOW":
-                file["数量"] = file["var1"]
+                file["数量"] = file["var1"] / 10.0
             case "DOOR":
-                file["数量"] = file["var1"]
+                file["数量"] = file["var1"] / 10.0
             case "WALL":
                 for i in range(len(file)):
                     if file.loc[i, "清单计量编码"] == 11209204:
-                        file.loc[i, "体积"] = file.loc[i, "面积"]
+                        file.loc[i, "体积"] = file.loc[i, "面积"] / 10.0
+            case "REBAR":
+                for i in range(len(file)):
+                    file.loc[i, "数量"] = (
+                        file.loc[i, "总钢筋长度"]
+                        * file.loc[i, "合计"]
+                        * file.loc[i, "var1"]
+                        / 1000000
+                    )  # mm -> m & kg -> t
+                    file.loc[i, "var1"] = file.loc[i, "族与类型"].lstrip("钢筋").lstrip(": ")
         if "体积" in file.columns:
             file = file.rename({"体积": "数量"}, axis=1)
         result = pd.concat(

@@ -12,7 +12,7 @@ See the Mulan PSL v2 for more details.
 
 import bd_toolkit as bd
 
-revit_file_name_list = ["KZGZ", "KL", "LB", "WALL", "DOOR", "WINDOW"]
+revit_file_name_list = ["KZGZ", "KL", "LB", "WALL", "DOOR", "WINDOW", "REBAR"]
 revit_file_path = "data/Revit_"
 
 bd.preprocessing.combine_revit_files(revit_file_path, revit_file_name_list).to_csv(
